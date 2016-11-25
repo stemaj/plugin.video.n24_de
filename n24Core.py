@@ -26,10 +26,23 @@ class N24Core(object):
         match = re.compile('source src=\"(.+?)\" type', re.DOTALL).findall(dataMain)[0]
         return match
 
+    def getWeatherCom(self):
+
+        urlMain = "http://www.wetter.com/videos/deutschlandwetter/";
+        stUrl = StemajUrl()
+        dataMain = stUrl.getUrl(urlMain, True)
+
+        self.error = stUrl.error;
+        if len(self.error) > 0:
+            return;
+
+        match = re.compile('contentUrl\": \"(.+?)\"', re.DOTALL).findall(dataMain)[0]
+        return match
+
 #TEST
-#nC = N24Core()
-#data = nC.getWeatherData()
-#x = 0
+nC = N24Core()
+data = nC.getWeatherCom()
+x = 0
 
 
 
