@@ -22,3 +22,5 @@
 - Patch by Brat
 2.0.13
 - added weather
+2.0.14
+- weather redirecting fix

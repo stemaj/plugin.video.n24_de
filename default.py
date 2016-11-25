@@ -8,6 +8,7 @@ import sys
 import xbmcplugin
 import xbmcaddon
 import xbmcgui
+from n24Core import N24Core
 
 socket.setdefaulttimeout(30)
 pluginhandle = int(sys.argv[1])
@@ -24,9 +25,17 @@ def index():
     addDir(translation(30004), baseUrl+"/n24/Mediathek/videos/q?query=&hitsPerPage=50&pageNum=1&recent=0&docType=CMVideo&category=&from=&to=&taxonomy=&type=32986&sort=new", 'listVideos', "")
     addDir(translation(30008), "", 'search', "")
     addLink(translation(30005), "http://www.n24.de/n24/Mediathek/Live/", 'playVideo', "")
-    addLink(translation(30010), "http://www.n24.de/n24/Nachrichten/Wetter/", 'playVideo', "")
+    addLink(translation(30010), "", 'playWeather', "")
     xbmcplugin.endOfDirectory(pluginhandle)
 
+def playWeather():
+    nC = N24Core()
+    data = nC.getWeatherData()
+    if (len(nC.error) > 0):
+        notification(nC.error)
+        return
+    listitem = xbmcgui.ListItem(path=data)
+    xbmcplugin.setResolvedUrl(pluginhandle, True, listitem)
 
 def listVideos(url):
     urlMain = url
@@ -137,5 +146,7 @@ elif mode == 'queueVideo':
     queueVideo(url, name)
 elif mode == 'search':
     search()
+elif mode == 'playWeather':
+    playWeather()
 else:
     index()
