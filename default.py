@@ -20,17 +20,26 @@ fanart = os.path.join(addonDir ,'fanart.jpg')
 icon = os.path.join(addonDir ,'icon.png')
 
 def index():
-    addLink("n24", "", 'playWeather', "")
-    addLink("wetter.com", "", 'playWeatherCom', "")
-    xbmcplugin.endOfDirectory(pluginhandle)
 
-def playWeatherCom():
+
+    #addLink("n24", "", 'playWeather', "")
+    addLink("wetter.info", "", 'playWeather', "")
+
     nC = N24Core()
-    data = nC.getWeatherCom()
+    data = nC.getWeatherComUrls()
     if (len(nC.error) > 0):
         notification(nC.error)
         return
-    listitem = xbmcgui.ListItem(path=data, thumbnailImage=icon, iconImage=fanart)
+    vid = ()
+    for dat in data:
+        vid = nC.getWeatherComVid(dat)
+        addLink("wetter.com - " + vid[0], vid[1], 'playWeatherCom', "")
+    #addLink("n24", "", 'playWeather', "")
+    xbmcplugin.endOfDirectory(pluginhandle)
+
+def playWeatherCom(url):
+
+    listitem = xbmcgui.ListItem(path=url, thumbnailImage=icon, iconImage=fanart)
     xbmcplugin.setResolvedUrl(pluginhandle, True, listitem)
 
 def playWeather():
@@ -69,6 +78,6 @@ name = urllib.unquote_plus(params.get('name', ''))
 if mode == 'playWeather':
     playWeather()
 elif mode == 'playWeatherCom':
-    playWeatherCom()
+    playWeatherCom(url)
 else:
     index()
