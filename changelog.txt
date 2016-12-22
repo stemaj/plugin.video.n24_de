@@ -2,3 +2,5 @@
 - first try
 0.0.2
 - more wetter.com Videos, removed n24, added wetter.info
+0.0.3
+- changes on wetter.com site, added zdf wetter

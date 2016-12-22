@@ -13,19 +13,13 @@ class N24Core(object):
 
     error = "";
 
-    def getWeatherData(self):
+    def getWeatherData(self, nr):
 
-        #urlMain = "http://m.n24.de/n24/Nachrichten/Wetter";
-        #stUrl = StemajUrl()
-        #dataMain = stUrl.getUrl(urlMain, True)
+        if nr == "2":
+            return "http://dlc3.t-online.de/mflash/wetterstudio_prem.mp4"
+        
+        return "https://zdfvodnone-vh.akamaihd.net/i/meta-files/zdf/smil/m3u8/300/16/10/161026_1900_wet/1/161026_1900_wet.smil/master.m3u8"
 
-        #self.error = stUrl.error;
-        #if len(self.error) > 0:
-        #    return;
-
-        #match = re.compile('source src=\"(.+?)\" type', re.DOTALL).findall(dataMain)[0]
-        #return match
-        return "http://dlc3.t-online.de/mflash/wetterstudio_prem.mp4"
 
     def getWeatherComUrls(self):
 
@@ -56,12 +50,12 @@ class N24Core(object):
         if len(self.error) > 0:
             return;
 
-        name = re.compile("name\": \"(.+?)\",", re.DOTALL).findall(dataMain)[0]
-        match = re.compile("contentUrl\": \"(.+?)\"", re.DOTALL).findall(dataMain)[0]
+        match = re.compile("itemprop=\"contentUrl\" content=\"(.+?)\">", re.DOTALL).findall(dataMain)[0]
+        name = re.compile("itemprop=\"name\">(.+?)</h3>", re.DOTALL).findall(dataMain)[0]
         return (name,match)
 
 
-#TEST
+##TEST
 #nC = N24Core()
 #data = nC.getWeatherComUrls()
 #vid = ()

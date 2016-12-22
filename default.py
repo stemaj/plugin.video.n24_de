@@ -22,8 +22,8 @@ icon = os.path.join(addonDir ,'icon.png')
 def index():
 
 
-    #addLink("n24", "", 'playWeather', "")
-    addLink("wetter.info", "", 'playWeather', "")
+    addLink("ZDF - So wird das Wetter", "1", 'playWeather', "")
+    addLink("wetter.info", "2", 'playWeather', "")
 
     nC = N24Core()
     data = nC.getWeatherComUrls()
@@ -42,9 +42,9 @@ def playWeatherCom(url):
     listitem = xbmcgui.ListItem(path=url, thumbnailImage=icon, iconImage=fanart)
     xbmcplugin.setResolvedUrl(pluginhandle, True, listitem)
 
-def playWeather():
+def playWeather(nr):
     nC = N24Core()
-    data = nC.getWeatherData()
+    data = nC.getWeatherData(nr)
     if (len(nC.error) > 0):
         notification(nC.error)
         return
@@ -76,7 +76,7 @@ url = urllib.unquote_plus(params.get('url', ''))
 name = urllib.unquote_plus(params.get('name', ''))
 
 if mode == 'playWeather':
-    playWeather()
+    playWeather(url)
 elif mode == 'playWeatherCom':
     playWeatherCom(url)
 else:
