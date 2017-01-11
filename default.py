@@ -21,33 +21,28 @@ icon = os.path.join(addonDir ,'icon.png')
 
 def index():
 
-
-    addLink("ZDF - So wird das Wetter", "1", 'playWeather', "")
-    addLink("wetter.info", "2", 'playWeather', "")
-
-    nC = N24Core()
-    data = nC.getWeatherComUrls()
-    if (len(nC.error) > 0):
-        notification(nC.error)
-        return
-    vid = ()
-    for dat in data:
-        vid = nC.getWeatherComVid(dat)
-        addLink("wetter.com - " + vid[0], vid[1], 'playWeatherCom', "")
-    #addLink("n24", "", 'playWeather', "")
+    #addLink("ZDF - So wird das Wetter", "1", 'playWeather', "")
+    addLink("wetter.com - Aktuell", "2", 'playWeather', "")
+    addLink("wetter.com - Vorschau", "3", 'playWeather', "")
+    addLink("n-tv wetter", "4", 'playWeather', "")
+    addLink("wetter.info", "5", 'playWeather', "")
     xbmcplugin.endOfDirectory(pluginhandle)
-
-def playWeatherCom(url):
-
-    listitem = xbmcgui.ListItem(path=url, thumbnailImage=icon, iconImage=fanart)
-    xbmcplugin.setResolvedUrl(pluginhandle, True, listitem)
 
 def playWeather(nr):
     nC = N24Core()
-    data = nC.getWeatherData(nr)
+    if nr == "2":
+        data = nC.getNtvWetterComAktuellVideo()
+    elif nr == "3":
+        data = nC.getNtvWetterComVorschauVideo()
+    elif nr == "4":
+        data = nC.getNtvWetterVideo()
+    elif nr == "5":
+        data = nC.getWetterInfoVideo()
+
     if (len(nC.error) > 0):
         notification(nC.error)
         return
+
     listitem = xbmcgui.ListItem(path=data, thumbnailImage=icon, iconImage=fanart)
     xbmcplugin.setResolvedUrl(pluginhandle, True, listitem)
 
@@ -77,7 +72,5 @@ name = urllib.unquote_plus(params.get('name', ''))
 
 if mode == 'playWeather':
     playWeather(url)
-elif mode == 'playWeatherCom':
-    playWeatherCom(url)
 else:
     index()
