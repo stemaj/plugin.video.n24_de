@@ -89,6 +89,71 @@ class N24Core(object):
         error = "Parse Error"
         return
 
+    def getWetterComSachsenVideo(self):
+
+        urlMain = "http://www.wetter.com/videos/regionalwetter"
+        stUrl = StemajUrl()
+        dataMain = stUrl.getUrl(urlMain, True)
+        if len(stUrl.error) > 0:
+            error = stUrl.error
+            return
+
+        match = re.compile('regionalwetter/sachsen(.+?)\" title=\"Sachsen', re.DOTALL).findall(dataMain)
+        if len(match) < 2:
+            error = "Parse Error"
+            return
+
+        url2 = urlMain + "/sachsen" + match[1]
+        dataMain2 = stUrl.getUrl(url2, True)
+        if len(stUrl.error) > 0:
+            error = stUrl.error
+            return
+
+        match = re.compile('meta itemprop=\"contentUrl\" content=\"(.+?)\">', re.DOTALL).findall(dataMain2)
+        if len(match) > 0:
+            return match[0]
+
+        error = "Parse Error"
+        return
+
+
+    def getMdrVideo(self):
+
+        urlMain = "http://www.mdr.de/mediathek/fernsehen/a-z/wetterfr100_zc-ca8ec3f4_zs-73445a6d.html"
+        stUrl = StemajUrl()
+        dataMain = stUrl.getUrl(urlMain, True)
+        if len(stUrl.error) > 0:
+            error = stUrl.error
+            return
+
+        match = re.compile('a href=\"/mediathek/fernsehen/a-z/sendung7(.+?).html', re.DOTALL).findall(dataMain)
+        if len(match) < 1:
+            error = "Parse Error"
+            return
+
+        url2 = "http://www.mdr.de/mediathek/fernsehen/a-z/sendung7" + match[0] + ".html";
+        dataMain2 = stUrl.getUrl(url2, True)
+        if len(stUrl.error) > 0:
+            error = stUrl.error
+            return
+
+        match = re.compile('/video-(.+?).xml', re.DOTALL).findall(dataMain2)
+        if len(match) < 1:
+            error = "Parse Error"
+            return
+
+        url3 = "http://www.mdr.de/mediathek/fernsehen/a-z/video-" + match[0] + ".xml";
+        dataMain3 = stUrl.getUrl(url3, True)
+        if len(stUrl.error) > 0:
+            error = stUrl.error
+            return
+
+        match = re.compile('<progressiveDownloadUrl>(.+?)</progressiveDownloadUrl>', re.DOTALL).findall(dataMain3)
+        if len(match) > 0:
+            return match[0]
+
+        error = "Parse Error"
+        return
 
     def getWetterInfoVideo(self):
 
@@ -132,4 +197,5 @@ class N24Core(object):
 
 #TEST
 #nC = N24Core()
-#nC.getNtvWetterComVorschauVideo()
+#nC.getMdrVideo()
+

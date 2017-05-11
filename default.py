@@ -24,8 +24,10 @@ def index():
     #addLink("ZDF - So wird das Wetter", "1", 'playWeather', "")
     addLink("wetter.com - Aktuell", "2", 'playWeather', "")
     addLink("wetter.com - Vorschau", "3", 'playWeather', "")
+    addLink("wetter.com - Regionalwetter Sachsen", "6", 'playWeather', "")
     addLink("n-tv wetter", "4", 'playWeather', "")
     addLink("wetter.info", "5", 'playWeather', "")
+    addLink("Wetter für 3 - mdr.de", "7", 'playWeather', "")
     xbmcplugin.endOfDirectory(pluginhandle)
 
 def playWeather(nr):
@@ -34,10 +36,14 @@ def playWeather(nr):
         data = nC.getNtvWetterComAktuellVideo()
     elif nr == "3":
         data = nC.getNtvWetterComVorschauVideo()
+    elif nr == "6":
+        data = nC.getWetterComSachsenVideo()
     elif nr == "4":
         data = nC.getNtvWetterVideo()
     elif nr == "5":
         data = nC.getWetterInfoVideo()
+    elif nr == "7":
+        data = nC.getMdrVideo()
 
     if (len(nC.error) > 0):
         notification(nC.error)
