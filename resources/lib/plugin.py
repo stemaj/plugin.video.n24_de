@@ -17,17 +17,14 @@ plugin = routing.Plugin()
 
 @plugin.route('/')
 def index():
-    addDirectoryItem(plugin.handle, plugin.url_for(
-        show_category, "one"), ListItem("Category One"), True)
-    addDirectoryItem(plugin.handle, plugin.url_for(
-        show_category, "two"), ListItem("Category Two"), True)
-    endOfDirectory(plugin.handle)
-
-
-@plugin.route('/category/<category_id>')
-def show_category(category_id):
-    addDirectoryItem(
-        plugin.handle, "", ListItem("Hello category %s!" % category_id))
+    data = read.load_url("https://www.wetter.com/videos/deutschlandwetter/")
+    arr = main.listOfNewest(data)
+    for x in arr:
+        data2 = read.load_url(x.link)
+        link = main.getVideoLink(data2)
+        listItem = ListItem(path=link , label=x.film)
+        listItem.setProperty('IsPlayable', 'true')
+        addDirectoryItem(plugin.handle, link, listItem)
     endOfDirectory(plugin.handle)
 
 def run():
