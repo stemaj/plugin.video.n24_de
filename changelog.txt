@@ -8,3 +8,5 @@
 - compact list, added ntv, removed zdf
 0.0.5
 - added sachsen (wetter.com / mdr)
+1.0.0
+- rework

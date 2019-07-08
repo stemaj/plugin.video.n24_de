@@ -1,15 +1,28 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<addon id="plugin.video.wettervorhersage" name="Wettervorhersage" version="0.0.5" provider-name="stemaj">
-	<requires>
-		<import addon="xbmc.python" version="2.1.0"/>
-	</requires>
-	<extension point="xbmc.python.pluginsource" library="default.py">
-		<provides>video</provides>
-	</extension>
-	<extension point="xbmc.addon.metadata">
-		<platform>all</platform>
-		<summary lang="de">Wettervorhersage Deutschland</summary>
-		<language>de</language>
-		<description lang="de">Videos von verschiedenen Quellen aktueller Wettervohersagen</description>
-	</extension>
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<addon id="plugin.video.wettervorhersage" name="Wettervorhersage" version="1.0.0" provider-name="stemaj">
+    <requires>
+        <import addon="xbmc.python" version="2.25.0"/>
+        <import addon="script.module.routing" version="0.2.1"/>
+        <import addon="script.module.urllib3" version="1.22"/>
+    </requires>
+    <extension point="xbmc.python.pluginsource" library="main.py">
+        <provides>video</provides>
+    </extension>
+    <extension point="xbmc.addon.metadata">
+        <summary lang="de_DE">Videos von verschiedenen Quellen aktueller Wettervohersagen</summary>
+        <description lang="de_DE"></description>
+        <language></language>
+        <platform>all</platform>
+        <license>MIT</license>
+        <forum></forum>
+        <website></website>
+        <email>steffen.majaura@gmail.com</email>
+        <source></source>
+        <news></news>
+        <disclaimer></disclaimer>
+        <assets>
+            <icon>resources/icon.png</icon>
+            <fanart>resources/fanart.jpg</fanart>
+        </assets>
+    </extension>
 </addon>
