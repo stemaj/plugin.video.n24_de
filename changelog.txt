@@ -10,3 +10,5 @@
 - added sachsen (wetter.com / mdr)
 1.0.0
 - rework
+1.0.1
+- other url

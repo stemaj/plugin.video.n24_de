@@ -3,3 +3,6 @@ https://www.wetter.com/videos/deutschlandwetter/
 
 001
 https://www.wetter.com/videos/deutschlandwetter/7-tage-wettertrend/57cd6c56cebfc040448b4567
+
+002 - Empfehlungen
+https://www.wetter.com/videos/

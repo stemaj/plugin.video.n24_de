@@ -18,7 +18,7 @@ plugin = routing.Plugin()
 
 @plugin.route('/')
 def index():
-    data = read.load_url("https://www.wetter.com/videos/deutschlandwetter/")
+    data = read.load_url("https://www.wetter.com/videos/")
     arr = main.listOfNewest(data)
     for x in arr:
         listItem = ListItem(label=x.film)

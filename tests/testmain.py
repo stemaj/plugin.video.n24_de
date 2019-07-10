@@ -20,3 +20,7 @@ class Test_1(unittest.TestCase):
     link = main.getVideoLink(data)
     self.assertEqual('https://cv2.wettercomassets.com/video-updates/2019/07/08/7-tage-trend-was-fuer-eine-turbulente-mist-woche_57cd6c56cebfc040448b4567/5d2323cd7bb3f/720p.mp4', link)
 
+  def test_3(self):
+    data = read.load_file('002')
+    arr = main.listOfNewest(data)
+    self.assertEqual(10, len(arr))

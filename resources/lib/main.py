@@ -14,7 +14,7 @@ def listOfNewest(bytes):
   splits3 = split2.split('anchor--section')
   splits4 = splits3[1:len(splits3)]
 
-  regex = r"href=\"(.+)\".+videochannel.+=\"(.+)\"><d"
+  regex = r"href=\"(.+)\".+data-p.+title=\"(.+)\"><d"
   
   filme = []
   for data in splits4:
