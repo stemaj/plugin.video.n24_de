@@ -23,4 +23,4 @@ class Test_1(unittest.TestCase):
   def test_3(self):
     data = read.load_file('002')
     arr = main.listOfNewest(data)
-    self.assertEqual(10, len(arr))
+    self.assertEqual(11, len(arr))

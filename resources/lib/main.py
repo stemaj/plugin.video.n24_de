@@ -10,7 +10,7 @@ class Film():
 
 def listOfNewest(bytes):
   split1 = bytes.decode('utf-8').split('Empfehlungen')[1]
-  split2 = split1.split('one-whole layout__item')[0]
+  split2 = split1.split('Video-Channels')[0]
   splits3 = split2.split('anchor--section')
   splits4 = splits3[1:len(splits3)]
 
